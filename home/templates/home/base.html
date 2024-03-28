@@ -1,791 +1,797 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Car Buying Rental Website</title>
+		<!-- Link To CSS -->
+		<link rel="stylesheet" href="./style.css" />
+		<!-- Box Icons -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+		/>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Buying Rental Website</title>
-    <!-- Link To CSS -->
-    <link rel="stylesheet" href="./style.css">
-    <!-- Box Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-</head>
+	<style>
+		/* Google Fonts */
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			scroll-padding-top: 2rem;
+			scroll-behavior: smooth;
+			list-style-type: none;
+			text-decoration: none;
+			font-family: 'Poppins', sans-serif;
+		}
+		:root {
+			--main-color: #fe5b3d;
+			/* --second-color:var(--second-color)#ffac28; */
+			--second-color: #f7aeb8;
+			--text-color: #444;
+			--gradient: linear-gradient(#fe5b3d, #ffac38);
+		}
 
-<style>
-    /* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-    margin: 0; 
-    padding: 0;
-    box-sizing: border-box;
-    scroll-padding-top: 2rem;
-    scroll-behavior:smooth;
-    list-style-type: none;
-    text-decoration: none;
-    font-family: 'Poppins', sans-serif; 
-}
-:root{
-    --main-color: #fe5b3d;
-    /* --second-color:var(--second-color)#ffac28; */
-    --second-color:#f7aeb8;
-    --text-color:#444;
-    --gradient:linear-gradient(#fe5b3d, #ffac38);
-}
+		/* Custom Scroll Bar */
+		html::-webkit-scrollbar {
+			width: 0.5rem;
+		}
+		html::-webkit-scrollbar-track {
+			background: transparent;
+		}
+		html::-webkit-scrollbar-thumb {
+			background: var(--main-color);
+			border-radius: 5rem;
+		}
+		section {
+			padding: 50px 100px;
+		}
+		header {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			right: 0;
+			z-index: 1000;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background: #eeeff1;
+			padding: 15px 100px;
+		}
+		.logo img {
+			width: 40px;
+		}
+		.navbar {
+			display: flex;
+		}
+		.navbar li {
+			position: relative;
+		}
+		.navbar a {
+			font-size: 1rem;
+			padding: 10px 20px;
+			color: var(--text-color);
+			font-weight: 500;
+		}
+		.navbar a::after {
+			content: '';
+			width: 0;
+			height: 3px;
+			background: var(--gradient);
+			position: absolute;
+			bottom: -4px;
+			left: 0;
+			transition: 0.5s;
+		}
+		.navbar a:hover::after {
+			width: 100%;
+		}
+		#menu-icon {
+			font-size: 24px;
+			cursor: pointer;
+			z-index: 1001;
+			display: none;
+		}
+		.header-btn a {
+			padding: 10px 20px;
+			color: var(--text-color);
+			font-weight: 500;
+		}
+		.header-btn .sign-in {
+			background: #474fa0;
+			color: #fff;
+			border-radius: 0.5rem;
+		}
+		.header-btn .sign-in:hover {
+			background: var(--main-color);
+		}
+		.header-btn .sign-up:hover {
+			font-weight: 700;
+		}
+		.home {
+			width: 100%;
+			margin: 0px 0;
+			min-height: 100vh;
+			position: relative;
+			background: url(img/cc1.jpg);
+			background-repeat: no repeat;
+			background-position: bottom;
+			background-size: cover;
+			display: grid;
+			align-items: center;
+			grid-template-columns: repeat(3, 1fr);
+		}
+		.text {
+			background-color: rgba(255, 255, 255, 0.2);
+			border-radius: 5%;
+			justify-content: center;
+			padding: 0px 20px;
+			margin: 20px -20px;
+		}
+		.text h1 {
+			font-size: 3rem;
+			letter-spacing: 2px;
+		}
+		.text span {
+			color: #9750f5e0;
+		}
+		.text p {
+			margin: 15px 0px;
+		}
+		.app-stores {
+			display: flex;
+			align-items: center;
+		}
+		.app-stores img {
+			width: 100%;
+			margin-right: 30px;
+			max-width: 183px;
+			cursor: pointer;
+		}
+		.app-stores img:hover {
+			transform: scale(1.03);
+		}
+		.form-container {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 1rem;
+			position: absolute;
+			bottom: 1rem;
+			left: 5rem;
+			background: rgba(255, 255, 255, 0.7);
+			padding: 20px;
+			border-radius: 0.5rem;
+		}
+		.input-box {
+			flex: 1 1 7rem;
+			display: flex;
+			flex-direction: column;
+		}
+		.input-box span {
+			font-weight: 500;
+		}
+		.input-box input {
+			padding: 7px;
+			outline: none;
+			border: none;
+			background: #e2e7f1;
+			border-radius: 0.5rem;
+			font-size: 1rem;
+		}
+		.form-container .btn {
+			flex: 1 1 7rem;
+			padding: 10px 34px;
+			border: none;
+			border-radius: 0.5rem;
+			background: #474fa0;
+			color: #fff;
+			font-size: 1rem;
+			font-weight: 500;
+		}
+		.form-container .btn:hover {
+			cursor: pointer;
+			background: var(--main-color);
+		}
+		.heading {
+			text-align: center;
+		}
+		.heading span {
+			font-weight: 500;
+			text-transform: uppercase;
+		}
+		.heading h1 {
+			font-size: 2rem;
+		}
+		.ride-container {
+			display: grid;
+			align-items: center;
+			grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+			grid-gap: 1rem;
+			margin-top: 2rem;
+		}
+		.ride-container .box {
+			text-align: center;
+			padding: 20px;
+		}
+		.ride-container .box .bx {
+			font-size: 34px;
+			padding: 10px;
+			color: var(--main-color);
+			background-color: #eeeff1;
+			border-radius: 0.6rem;
+		}
+		.ride-container .box h2 {
+			font-size: 1.3rem;
+			font-weight: 500;
+			margin: 1rem;
+		}
+		.ride-container .box .bx:hover,
+		.ride-container .box .bxs-calendar-check {
+			background: var(--gradient);
+			color: #fff;
+		}
+		.services-container {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+			gap: 1rem;
+			margin-top: 2rem;
+		}
+		.services-container .box {
+			padding: 10px;
+			border-radius: 1rem;
+			box-shadow: 1px 4px 41px rgba(0, 0, 0, 0.1);
+		}
+		.services-container .box .box-img {
+			width: 300px;
+			height: 200px;
+		}
+		.services-container .box .box-img img {
+			width: 100%;
+			height: 100%;
+			border-radius: 1rem;
+			object-fit: fill;
+			object-position: center;
+		}
 
-/* Custom Scroll Bar */
-html::-webkit-scrollbar {
-    width: 0.5rem;
-}
-html::-webkit-scrollbar-track {
-    background: transparent;
-}
-html::-webkit-scrollbar-thumb {
-    background: var(--main-color);
-    border-radius: 5rem;
-}
-section{
-    padding: 50px 100px;
-}
-header{
-    position: fixed;
-    width: 100%;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #eeeff1;
-    padding: 15px 100px;
+		.services-container .box p {
+			padding: 0 10px;
+			border: 1px solid var(--text-color);
+			width: 58px;
+			border-radius: 0.5rem;
+			margin: 1rem 0 1rem;
+		}
+		.services-container .box h3 {
+			font-weight: 600;
+		}
+		.services-container .box h2 {
+			font-size: 1.1rem;
+			font-weight: 600;
+			/* color: var(--main-color); */
+			color: #f10ed39d;
+			margin: 0.2rem 0 0.6rem;
+		}
+		.services-container .box .btn {
+			display: flex;
+			justify-content: center;
+			background: #474fa0;
+			color: #fff;
+			padding: 10px;
+			border-radius: 0.5rem;
+			font-size: 1.2rem;
+		}
+		.services-container .box .btn:hover {
+			background: var(--main-color);
+		}
+		.about-container {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			margin-top: 2rem;
+			align-items: center;
+			gap: 1rem;
+			margin-bottom: 1rem;
+		}
+		.about-img img {
+			width: 100%;
+		}
+		.about-text span {
+			font-weight: 500;
+			color: var(--main-color);
+			text-transform: uppercase;
+		}
+		.about-text p {
+			line-height: 1.7;
+			margin: 0.5rem 0 1.6rem;
+		}
 
-}
-.logo img {
-    width: 40px;
-}
-.navbar {
-    display: flex;
-} 
-.navbar li{
-    position: relative;
-}
-.navbar a{
-    font-size: 1rem;
-    padding: 10px 20px;
-    color: var(--text-color);
-    font-weight: 500;
-}
-.navbar a::after {
-    content: "";
-    width: 0;
-    height: 3px;
-    background: var(--gradient);
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    transition: 0.5s;
-}
-.navbar a:hover::after {
-    width: 100%;
-}
-#menu-icon{
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1001;
-    display: none;
-}
-.header-btn a{
-    padding: 10px 20px;
-    color: var(--text-color);
-    font-weight: 500;
-}
-.header-btn .sign-in {
-    background: #474fa0;
-    color: #fff;
-    border-radius: 0.5rem;
-}
-.header-btn .sign-in:hover{
-    background: var(--main-color);
-}
-.header-btn .sign-up:hover{
-    font-weight: 700;
-}
-.home {
-    width: 100%;
-    margin: 0px 0;
-    min-height: 100vh;
-    position: relative;
-    background: url(img/cc1.jpg);
-    background-repeat: no repeat;
-    background-position: bottom;
-    background-size:cover;
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(3, 1fr);
-}
-.text{
-    background-color:rgba(255,255,255,0.2);
-    border-radius: 5%;
-    justify-content: center;
-    padding: 0px 20px;
-    margin: 20px -20px;
-}
-.text h1{
-    font-size: 3rem;
-    letter-spacing: 2px;
-}
-.text span{
-    color: #9750f5e0;
-}
-.text p{
-    margin: 15px 0px;
-}
-.app-stores { 
-    display: flex;
-    align-items: center;
-}
-.app-stores img{
-    width: 100%;
-    margin-right: 30px;
-    max-width: 183px;
-    cursor: pointer;
-}
-.app-stores img:hover{
-    transform:scale(1.03);
-}
-.form-container{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-    position: absolute;
-    bottom: 1rem;
-    left: 5rem;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 20px;
-    border-radius: 0.5rem;
-}
-.input-box{
-    flex: 1 1 7rem;
-    display: flex;
-    flex-direction: column;
-
-}
-.input-box span {
-    font-weight: 500;
-}
-.input-box input {
-    padding: 7px;
-    outline: none;
-    border: none;
-    background: #e2e7f1;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-}
-.form-container .btn {
-    flex: 1 1 7rem;
-    padding: 10px 34px;
-    border: none;
-    border-radius: 0.5rem;
-    background: #474fa0;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 500;
-}
-.form-container .btn:hover {
-    cursor: pointer;
-    background: var(--main-color);
-}
-.heading{
-    text-align: center;
-}
-.heading span{
-    font-weight: 500;
-    text-transform: uppercase;
-
-}
-.heading h1 {
-    font-size: 2rem;
-}
-.ride-container{
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
-    grid-gap: 1rem;
-    margin-top: 2rem;
-
-}
-.ride-container .box{
-    text-align: center;
-    padding: 20px;
-
-}
-.ride-container .box .bx{
-    font-size: 34px;
-    padding: 10px;
-    color: var(--main-color);
-    background-color: #eeeff1;
-    border-radius: 0.6rem;
-}
-.ride-container .box h2{
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin: 1rem;
-}
-.ride-container .box .bx:hover, 
-.ride-container .box .bxs-calendar-check {
-    background: var(--gradient);
-    color: #fff;
-}
-.services-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
-    gap: 1rem;
-    margin-top: 2rem;
-}
-.services-container .box{
-    padding: 10px;
-    border-radius: 1rem;
-    box-shadow: 1px 4px 41px rgba(0, 0, 0, 0.1);
-}
-.services-container .box .box-img {
-    width: 300px;
-    height: 200px;
-}
-.services-container .box .box-img img{
-    width: 100%;
-    height: 100%;
-    border-radius: 1rem;
-    object-fit: fill;
-    object-position: center;
-}
-
-.services-container .box p{
-    padding: 0 10px;
-    border: 1px solid var(--text-color);
-    width: 58px;
-    border-radius: 0.5rem;
-    margin:1rem 0 1rem;
-}
-.services-container .box h3 {
-    font-weight: 600;
-}
-.services-container .box h2{
-    font-size: 1.1rem;
-    font-weight: 600;
-    /* color: var(--main-color); */
-    color: #f10ed39d;
-    margin: 0.2rem 0 0.6rem;
-}
-.services-container .box .btn{
-    display: flex;
-    justify-content: center;
-    background: #474fa0;
-    color: #fff;
-    padding: 10px;
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
-}
-.services-container .box .btn:hover{
-    background: var(--main-color)
-}
-.about-container{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: 2rem;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-.about-img img{
-    width: 100%;
-}
-.about-text span {
-    font-weight: 500;
-    color: var(--main-color);
-    text-transform: uppercase;
-}
-.about-text p{
-    line-height: 1.7;
-    margin: 0.5rem 0 1.6rem;
-}
-
-.about-text .btn{
-    padding: 10px 20px;
-    background: #474fa0;
-    color: #fff;
-    border-radius: 0.5rem;
-}
-.about-text .btn:hover{
-    background: var(--main-color);
-}
-.reviews-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, auto));
-    gap: 1rem;
-    margin-top: 2rem;
-    /* align-items: center;
+		.about-text .btn {
+			padding: 10px 20px;
+			background: #474fa0;
+			color: #fff;
+			border-radius: 0.5rem;
+		}
+		.about-text .btn:hover {
+			background: var(--main-color);
+		}
+		.reviews-container {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+			gap: 1rem;
+			margin-top: 2rem;
+			/* align-items: center;
     justify-content:center;
     text-align: center; */
-}
-.rev-img{
-    width: 70px;
-    height: 70px;
-    margin: auto;
+		}
+		.rev-img {
+			width: 70px;
+			height: 70px;
+			margin: auto;
+		}
+		.rev-img img {
+			height: 100%;
+			width: 100%;
+			border-radius: 50%;
+			object-fit: cover;
+			object-position: top;
+			border: 2px solid var(--second-color);
+		}
+		.reviews-container .box {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			padding: 20px;
+			box-shadow: 1px 4px 41px rgba(0, 0, 0, 0.1);
+			border-radius: 0.5rem;
+		}
+		.reviews-container .box h2 {
+			font-size: 1.1rem;
+			font-weight: 600;
+			margin: 0.5rem 0 0.5rem;
+		}
+		.reviews-container .box p {
+			font-style: italic;
+		}
+		.reviews-container .box .stars .bx {
+			color: var(--main-color);
+		}
+		.newsletter {
+			background: linear-gradient(45deg, #fe5b3d, #fffc38);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.newsletter h2 {
+			color: #fff;
+			font-size: 1.9rem;
+		}
+		.newsletter .box {
+			margin-top: 1rem;
+			background: #fff;
+			padding: 4px 8px;
+			border-radius: 0.5rem;
+			width: 350px;
+			display: flex;
+			justify-content: space-between;
+		}
+		.newsletter .box input {
+			border: none;
+			outline: none;
+			padding: 8px 20px;
+			font-size: 0.9rem;
+		}
+		.newsletter .box .btn {
+			background: #474fa0;
+			color: #fff;
+			padding: 8px 20px;
+			border-radius: 0.5rem;
+			text-align: center;
+		}
+		.copyright {
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.social a {
+			color: #444;
+			padding: 0px 0.5rem;
+			margin: 0px 20px;
+			font-size: 1.4rem;
+		}
+		/* Making REsponsive */
+		@media (max-width: 991px) {
+			header {
+				padding: 18px 40px;
+			}
+			section {
+				padding: 50px 40px;
+			}
+			.home {
+				width: 100%;
+				margin: 80px 0;
+				min-height: 90vh;
+				position: relative;
+				background: url(img/cc1.jpg);
+				background-repeat: no repeat;
+				background-position: top;
+				background-size: cover;
+				display: grid;
+				align-content: flex-start;
+				grid-template-columns: repeat(2, 1fr);
+			}
+			.text {
+				background: #ffffff66;
+			}
+			.app-stores {
+				display: flex;
+			}
+			.form-container {
+				/* right: 5rem; */
+			}
+		}
+		@media (max-width: 850px) {
+			header {
+				padding: 18px 20px;
+			}
+			section {
+				padding: 50px 40px;
+			}
+		}
+		@media (max-width: 768px) {
+			header {
+				padding: 11px 40px;
+			}
+			#menu-icon {
+				display: initial;
+			}
+			.sign-up {
+				display: none;
+			}
 
-}
-.rev-img img{
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top;
-    border: 2px solid var(--second-color);
-}
-.reviews-container .box{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    box-shadow: 1px 4px 41px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-}
-.reviews-container .box h2{
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin:0.5rem 0 0.5rem;
-}
-.reviews-container .box p{
-    font-style: italic;
-}
-.reviews-container .box .stars .bx{
-    color: var(--main-color);
+			.home {
+				grid-template-columns: 1fr;
+			}
+			.form-container {
+				position: unset;
+			}
+			header .navbar {
+				position: absolute;
+				top: -500px;
+				left: 0;
+				right: 0;
+				display: flex;
+				flex-direction: column;
+				background: #fff;
+				box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+				transition: 0.2 ease;
+				text-align: left;
+			}
+			.navbar.active {
+				top: 100%;
+			}
+			.navbar a {
+				padding: 1rem;
+				border-left: 2px solid var(--main-color);
+				margin: 1rem;
+				display: block;
+			}
+			.navbar a:hover {
+				color: #fff;
+				background: var(--main-color);
+				border: none;
+			}
+			.navbar a::after {
+				display: none;
+			}
+			.heading span {
+				font-size: 0.9rem;
+				font-weight: 600rem;
+			}
+			.heading h1 {
+				font-size: 1.3rem;
+			}
+			.about-container {
+				grid-template-columns: 1fr;
+				text-align: center;
+			}
+			.reviews-container {
+				grid-template-columns: 1fr;
+			}
+			.box-img {
+				margin: auto;
+			}
+		}
+		@media (max-width: 568px) {
+			.copyright {
+				flex-direction: column;
+				gap: 0.8rem;
+			}
+			.newsletter .box {
+				height: 90px;
+				width: 248px;
+				display: flex;
+				flex-direction: column;
+			}
+		}
+		@media (max-width: 350px) {
+			header {
+				padding: 4px 14px;
+			}
+			.logo img {
+				width: 30px;
+			}
+			section {
+				padding: 50px 14px;
+			}
+			.reviews-container {
+				grid-template-columns: 1fr;
+			}
+			.header-btn {
+				padding: 7px 10px;
+				font-size: 14px;
+				font-weight: 400;
+			}
+		}
+	</style>
 
-}
-.newsletter{
-    background: linear-gradient(45deg, #fe5b3d, #fffc38);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.newsletter h2{
-    color: #fff;
-    font-size: 1.9rem;
-}
-.newsletter .box{
-    margin-top: 1rem;
-    background: #fff;
-    padding: 4px 8px;
-    border-radius: 0.5rem;
-    width: 350px;
-    display: flex;
-    justify-content: space-between;
-}
-.newsletter .box input{
-    border: none;
-    outline: none;
-    padding: 8px 20px;
-    font-size: 0.9rem;
-}
-.newsletter .box .btn{
-    background: #474fa0;
-    color: #fff;
-    padding: 8px 20px;
-    border-radius: 0.5rem;
-    text-align: center;
-}
-.copyright{
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.social a{
-    color: #444;
-    padding: 0px 0.5rem;
-    margin: 0px 20px;
-    font-size: 1.4rem;
+	<body>
+		<header>
+			<a href="{% url 'home' %}" class="logo"
+				><img src="{% static 'img/jeep.jpeg' %}" alt=""
+			/></a>
+			<div class="bx bx-menu" id="menu-icon"></div>
+			<ul class="navbar">
+				<li><a href="#home">Home</a></li>
+				<li><a href="{% url 'ride' %}">Ride</a></li>
+				<li><a href="#services">Services</a></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#reviews">Reviews</a></li>
 
-}
-/* Making REsponsive */
-@media (max-width:991px){
-    header{
-        padding: 18px 40px;
-    }
-    section{
-        padding: 50px 40px;
+				<div class="header-btn">
+					<a href="{% url 'cart' %}" class="sign-up">Dashboard</a>
+					{% if request.user.is_authenticated %} {% if request.user.get_cart_count %}
+					<a href="{% url 'cart' %}" class="sign-up">Dashboard</a>
+					{% endif %}
+					<a href="{% url 'Logout' %}" class="sign-up">Logout</a>
+					{% comment %}
+					<p>{{request.user.get_cart_count}}</p>
+					{% endcomment %} {% comment %} <a href="#" class="sign-in">Sign In</a> {%
+					endcomment %} {% else %}
+					<a href="{% url 'Login' %}" class="sign-up">Login</a>
+					<a href="{% url 'Register' %}" class="sign-in">Register</a>
 
-    }
-    .home {
-        width: 100%;
-        margin: 80px 0;
-        min-height: 90vh;
-        position: relative;
-        background: url(img/cc1.jpg);
-        background-repeat: no repeat;
-        background-position: top;
-        background-size: cover;
-        display: grid;
-        align-content: flex-start;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .text{
-        background: #ffffff66;
-    }
-    .app-stores { 
-        display: flex;
-    } 
-    .form-container{
-        /* right: 5rem; */
-    }  
-}
-@media (max-width:850px){
-    header{
-        padding: 18px 20px;
-    }
-    section{
-        padding: 50px 40px;
-    }
-}
-@media (max-width:768px){
-    header {
-        padding: 11px 40px;
-    }
-    #menu-icon{
-        display: initial;
-    }
-    .sign-up{
-        display: none;
-    }
-    
-    .home{
-        grid-template-columns: 1fr;
-    }
-    .form-container{
-        position: unset;
-    }
-    header .navbar{
-        position: absolute;
-        top:-500px;
-        left: 0;
-        right: 0;
-        display: flex;
-        flex-direction: column;
-        background: #fff;
-        box-shadow: 0 4px 4px rgba(0,0,0,0.1);
-        transition: 0.2 ease;
-        text-align:left;
-    }
-    .navbar.active{
-        top:100%;
+					{% endif %}
+				</div>
+			</ul>
+		</header>
+		<!-- Home -->
+		<section class="home" id="home">
+			<div class="text">
+				<h1><span>Looking</span> to <br />rent a car</h1>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quaerat
+					officiis doloremque eum perferendis doloribus minima illo quam sed odit.
+				</p>
+				<div class="app-stores">
+					<a href="#"> <img src="img/ios6.png" alt="" /></a>
+					<a href="#"><img src="img/play2.png" alt="" /></a>
+				</div>
+			</div>
 
-    }
-    .navbar a{
-        padding: 1rem;
-        border-left: 2px solid var(--main-color);
-        margin:1rem;
-        display: block;
-    }
-    .navbar a:hover{
-        color:#fff;
-        background: var(--main-color);
-        border: none;
-    }
-    .navbar a::after {
-        display: none;
-    }
-    .heading span {
-        font-size: 0.9rem;
-        font-weight: 600rem;
-    }
-    .heading h1{
-        font-size: 1.3rem;
-    }
-    .about-container{
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    .reviews-container{
-        grid-template-columns: 1fr;
-    }
-    .box-img{
-        margin: auto;
-    }
+			<form action="">
+				<div class="form-container">
+					<div class="input-box">
+						<span>Location</span>
+						<input type="search" name="" id="" placeholder="Search Places" />
+					</div>
+					<div class="input-box">
+						<span>Pick-Up Date</span>
+						<input type="date" name="" id="" />
+					</div>
+					<div class="input-box">
+						<span>Return Date</span>
+						<input type="date" name="" id="" />
+					</div>
+					<input type="submit" name="" id="" class="btn" />
+				</div>
+			</form>
+		</section>
 
+		<!-- Ride -->
+		<section class="ride" id="ride">
+			<div class="heading">
+				<span>How It Works</span>
+				<h1>Rent With 3 Easy Steps</h1>
+			</div>
+			<div class="ride-container">
+				<div class="box">
+					<i class="bx bxs-map"></i>
+					<h2>Choose a location</h2>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum fugiat
+						corrupti atque, temporibus ducimus iste est saepe repellendus debitis?
+						Temporibus.
+					</p>
+				</div>
 
-}
-@media (max-width:568px){
-    .copyright{
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-    .newsletter .box{
-        height: 90px;
-        width:248px;
-        display: flex;
-        flex-direction: column;
-    }
-}
-@media (max-width:350px) {
-    header{
-        padding: 4px 14px;
+				<div class="box">
+					<i class="bx bxs-calendar-check"></i>
+					<h2>Pick-Up Date</h2>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum fugiat
+						corrupti atque, temporibus ducimus iste est saepe repellendus debitis?
+						Temporibus.
+					</p>
+				</div>
 
-    }
-    .logo img{
-        width: 30px;
-    }
-    section{
-        padding: 50px 14px;
-    }
-    .reviews-container{
-        grid-template-columns: 1fr;
-    }
-    .header-btn {
-        padding: 7px 10px;
-        font-size: 14px;
-        font-weight: 400;
-    }
-}
-</style>
+				<div class="box">
+					<i class="bx bxs-calendar-star"></i>
+					<h2>Book A Car</h2>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum fugiat
+						corrupti atque, temporibus ducimus iste est saepe repellendus debitis?
+						Temporibus.
+					</p>
+				</div>
+			</div>
+		</section>
 
-<body>
-    <header>
-        <a href="{% url 'home' %}" class="logo"><img src="{% static 'img/jeep.jpeg' %}" alt=""></a>
-        <div class="bx bx-menu" id="menu-icon"></div>
-        <ul class="navbar">
-            <li><a href="#home">Home</a></li>
-            <li><a href="{% url 'ride' %}">Ride</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#reviews">Reviews</a></li>
-            
-        <div class="header-btn">
-            {% if request.user.is_authenticated %}
-            {% if request.user.get_cart_count  %}
-            <a href="{% url 'cart' %}" class="sign-up">Dashboard</a>
-            {% endif %}
-            <a href="{% url 'Logout' %}" class="sign-up">Logout</a>
-            {% comment %} <p> {{request.user.get_cart_count}} </p> {% endcomment %}
-            {% comment %} <a href="#" class="sign-in">Sign In</a> {% endcomment %}
-            {% else %}
-            <a href="{% url 'Login' %}" class="sign-up">Login</a>
-            <a href="{% url 'Register' %}" class="sign-in">Register</a> 
-    
-            {% endif %}
-        </div>
-        </ul>
-       
-    </header>
-    <!-- Home -->
-    <section class="home" id="home">
-        <div class="text">
-            <h1><span>Looking</span> to <br>rent a car</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quaerat officiis doloremque eum perferendis
-                doloribus minima illo quam sed odit.
-            </p>
-            <div class="app-stores">
-                <a href="#"> <img src="img/ios6.png" alt=""></a>
-                <a href="#"><img src="img/play2.png" alt=""></a>
-            </div>
-        </div>
+		<!-- Services -->
+		<section class="services" id="services">
+			<div class="heading">
+				<span>Best Services</span>
+				<h1>Explore Out Top Deals <br />From Top Rated Dealers</h1>
+			</div>
+			<div class="services-container">
+				{% for cars in car %}
+				<div class="box">
+					<div class="box-img">
+						<img src="{{cars.images.url}}" alt="" />
+					</div>
+					<p>2017</p>
+					<p><a href="{% url 'detail' cars.uid %}">View</a></p>
+					<h3>2018 Honda Civic</h3>
+					<h2>$58500 | $538 <span>month</span></h2>
+					<a href="#" class="btn">Rent Now</a>
+				</div>
+				{% endfor %}
+			</div>
+		</section>
 
-        <form action="">
-            <div class="form-container">
-                <div class="input-box">
-                    <span>Location</span>
-                    <input type="search" name="" id="" placeholder="Search Places">
-                </div>
-                <div class="input-box">
-                    <span>Pick-Up Date</span>
-                    <input type="date" name="" id="">
-                </div>
-                <div class="input-box">
-                    <span>Return Date</span>
-                    <input type="date" name="" id="">
-                </div>
-                <input type="submit" name="" id="" class="btn">
-            </div>
-        </form>
-    </section>
+		<!-- About -->
+		<section class="about" id="about">
+			<div class="heading">
+				<span>About Us</span>
+				<h1>Best Customer Experience</h1>
+			</div>
+			<div class="about-container">
+				<div class="about-img">
+					<img src="img/cc.jpeg" alt="about.jpg" />
+				</div>
+				<div class="about-text">
+					<span>About Us</span>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ea, nobis
+						aspernatur eos a, eius ut in sit qui minima fuga? Nobis rerum laborum
+						maiores quo adipisci sequi illo eaque, corporis quam expedita veritatis.
+					</p>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ad iusto
+						officiis hic pariatur perspiciatis. Doloribus, sit quas?
+					</p>
+					<a href="#" class="btn">Learn More</a>
+				</div>
+			</div>
+		</section>
 
+		<!-- Reviews -->
+		<section class="reviews" id="reviews">
+			<div class="heading">
+				<span>Reviews</span>
+				<h1>What Our Customers Say</h1>
+			</div>
+			<div class="reviews-container">
+				<div class="box">
+					<div class="rev-img">
+						<img src="img/rev1.jpeg" alt="rev1.jpg" />
+					</div>
+					<h2>Someone Name</h2>
+					<div class="stars">
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star-half"></i>
+					</div>
+					<p>
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, facere
+						ad iusto ea quasi accusamus necessitatibus sint totam.
+					</p>
+				</div>
+				<div class="box">
+					<div class="rev-img">
+						<img src="img/rev2.jpg" alt="rev1.jpg" />
+					</div>
+					<h2>Someone Name</h2>
+					<div class="stars">
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star-half"></i>
+					</div>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque mollitia
+						quos alias laboriosam vero? At error dolorem nam.
+					</p>
+				</div>
+				<div class="box">
+					<div class="rev-img">
+						<img src="img/rev3.jpg" alt="rev1.jpg" />
+					</div>
+					<h2>Someone Name</h2>
+					<div class="stars">
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star"></i>
+						<i class="bx bxs-star-half"></i>
+					</div>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus sapiente
+						labore, iure ea quisquam cupiditate minus perferendis mollitia?
+					</p>
+				</div>
+			</div>
+		</section>
 
-    <!-- Ride -->
-    <section class="ride" id="ride">
-        <div class="heading">
-            <span>How It Works</span>
-            <h1>Rent With 3 Easy Steps</h1>
-        </div>
-        <div class="ride-container">
-            <div class="box">
-                <i class="bx bxs-map"></i>
-                <h2>Choose a location</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum fugiat corrupti atque, temporibus ducimus iste est saepe repellendus debitis? Temporibus.</p>
-            </div>
-            
-            <div class="box">
-                <i class='bx bxs-calendar-check'></i>
-                <h2>Pick-Up Date</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum fugiat corrupti atque, temporibus ducimus iste est saepe repellendus debitis? Temporibus.</p>
-            </div>
+		<!-- Newsletter -->
+		<section class="newsletter">
+			<h2>Subscribe To Newsletter</h2>
+			<div class="box">
+				<input type="email" name="email" id="" placeholder="Enter Your Email..." />
+				<a href="#" class="btn">Subscribe</a>
+			</div>
+		</section>
 
-            <div class="box">
-                <i class='bx bxs-calendar-star'></i>
-                <h2>Book A Car</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum fugiat corrupti atque, temporibus ducimus iste est saepe repellendus debitis? Temporibus.</p>
-            </div>
+		<!-- Scroll Reveal -->
+		<script src="https://unpkg.com/scrollreveal"></script>
 
-    
-        </div>
-    </section>
+		<!-- Link To JS -->
+		<script>
+			let menu = document.querySelector('#menu-icon');
+			let navbar = document.querySelector('.navbar');
 
-    <!-- Services -->
-    <section class="services" id="services">
-        <div class="heading">
-            <span>Best Services</span>
-            <h1>Explore Out Top Deals <br>From Top Rated Dealers
-            </h1>
-        </div>
-        <div class="services-container">
-            {% for cars in car %}
-            <div class="box">
-                <div class="box-img">
-                    <img src="{{cars.images.url}}" alt="">
-                </div>
-                <p>2017</p>
-                <p><a href="{% url 'detail' cars.uid %}" >View</a></p>
-                <h3>2018 Honda Civic</h3>
-                <h2>$58500 | $538 <span>month</span> </h2>
-                <a href="#" class="btn">Rent Now</a>
-            </div>
-            {% endfor %}
-            
-            
-        </div>
-    </section>
+			menu.onclick = () => {
+				menu.classList.toggle('bx-x');
+				navbar.classList.toggle('active');
+			};
 
-    <!-- About -->
-    <section class="about" id="about">
-        <div class="heading">
-            <span>About Us</span>
-            <h1>Best Customer Experience</h1>
-        </div>
-        <div class="about-container">
-            <div class="about-img">
-                <img src="img/cc.jpeg" alt="about.jpg">
-            </div>
-            <div class="about-text">
-                <span>About Us</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ea, nobis aspernatur eos a, eius ut in sit qui minima fuga? Nobis rerum laborum maiores quo adipisci sequi illo eaque, corporis quam expedita veritatis.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ad iusto officiis hic pariatur perspiciatis. Doloribus, sit quas?</p>
-                <a href="#" class="btn">Learn More</a>
-            </div>
-        </div>
-    </section>
+			window.onscroll = () => {
+				menu.classList.remove('bx-x');
+				navbar.classList.remove('active');
+			};
 
+			const sr = ScrollReveal({
+				distance: '60px',
+				duration: 2500,
+				delay: 400,
+				reset: true,
+			});
 
-    <!-- Reviews -->
-    <section class="reviews" id="reviews">
-        <div class="heading">
-            <span>Reviews</span>
-            <h1>What Our Customers Say</h1>
-        </div>
-        <div class="reviews-container">
-            <div class="box">
-                <div class="rev-img">
-                    <img src="img/rev1.jpeg" alt="rev1.jpg">
-                </div>
-                <h2>Someone Name</h2>
-                <div class="stars">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star-half' ></i>
-                </div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, facere ad iusto ea quasi accusamus necessitatibus sint totam.</p>
-            </div>
-            <div class="box">
-                <div class="rev-img">
-                    <img src="img/rev2.jpg" alt="rev1.jpg">
-                </div>
-                <h2>Someone Name</h2>
-                <div class="stars">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star-half' ></i>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque mollitia quos alias laboriosam vero? At error dolorem nam.</p>
-            </div>
-            <div class="box">
-                <div class="rev-img">
-                    <img src="img/rev3.jpg" alt="rev1.jpg">
-                </div>
-                <h2>Someone Name</h2>
-                <div class="stars">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star-half' ></i>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus sapiente labore, iure ea quisquam cupiditate minus perferendis mollitia?</p>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Newsletter -->
-    <section class="newsletter">
-        <h2>Subscribe To Newsletter</h2>
-        <div class="box">
-            <input type="email" name="email" id="" placeholder="Enter Your Email...">
-            <a href="#" class="btn" >Subscribe</a>
-        </div>
-    </section>
-    
-    
-
-<!-- Scroll Reveal -->
-<script src="https://unpkg.com/scrollreveal"></script>
-
-
-    <!-- Link To JS -->
-    <script>
-        let menu = document.querySelector('#menu-icon');
-let navbar = document.querySelector('.navbar')
-
-menu.onclick = () =>{
-    menu.classList.toggle('bx-x');
-    navbar.classList.toggle('active');
-}
-
-window.onscroll = () => {
-    menu.classList.remove('bx-x');
-    navbar.classList.remove('active');
-
-}
-
-const sr = ScrollReveal ({
-    distance: '60px',
-    duration: 2500,
-    delay:400,
-    reset:true
-})
-
-sr.reveal('.text', {delay: 150, origin: 'top'});
-sr.reveal('.form-container', {delay: 200, origin: 'left'});
-sr.reveal('.heading', {delay: 30, origin: 'top'});
-sr.reveal('.ride-container .box', {delay: 20, origin: 'top'});
-sr.reveal('.services', {delay: 20, origin: 'top'});
-sr.reveal('.about-container', {delay: 50, origin: 'top'});
-sr.reveal('.reviews-container', {delay: 50, origin: 'top'});
-sr.reveal('.newsletter .box', {delay: 400, origin: 'bottom'});
-    </script>
-
-</body>
-
+			sr.reveal('.text', { delay: 150, origin: 'top' });
+			sr.reveal('.form-container', { delay: 200, origin: 'left' });
+			sr.reveal('.heading', { delay: 30, origin: 'top' });
+			sr.reveal('.ride-container .box', { delay: 20, origin: 'top' });
+			sr.reveal('.services', { delay: 20, origin: 'top' });
+			sr.reveal('.about-container', { delay: 50, origin: 'top' });
+			sr.reveal('.reviews-container', { delay: 50, origin: 'top' });
+			sr.reveal('.newsletter .box', { delay: 400, origin: 'bottom' });
+		</script>
+	</body>
 </html>
