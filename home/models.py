@@ -61,16 +61,27 @@ class Cart(BaseModel):
         
     @property
     def tax_cart_total(self):
-        t= (CartItems.objects.filter(cart = self).aggregate(Sum('car__price'))['car__price__sum'])*0.5
+        print(CartItems)
+        car_price_sum = (CartItems.objects.filter(cart = self).aggregate(Sum('car__price'))['car__price__sum']) 
+        if car_price_sum is None:
+            car_price_sum = 0
+        # t= (CartItems.objects.filter(cart = self).aggregate(Sum('car__price'))['car__price__sum'])*0.5
+        t =car_price_sum*0.5
+        if t is None:
+            return 0.0
         if t==0:
             return 0
+            
         else:
             return t
     
     @property
     def get_cart_total(self):
-        t= (CartItems.objects.filter(cart = self).aggregate(Sum('car__price'))['car__price__sum']) + (CartItems.objects.filter(cart = self).aggregate(Sum('car__price'))['car__price__sum'])*0.5 + 10000
-        
+        car_price_sum = (CartItems.objects.filter(cart = self).aggregate(Sum('car__price'))['car__price__sum']) 
+        if car_price_sum is None:
+            car_price_sum = 0
+
+        t = car_price_sum + car_price_sum * 0.5 + 149
         if t==0:
             return 0
         else:

@@ -410,25 +410,22 @@
 </style>
 
 <div class="wrap cf">
-	<h1 class="projTitle"><span>Your</span> Shopping Cart</h1>
-	<div class="heading cf">
-		<h1>My Cart</h1>
-		<a href="{% url 'buyer' %}" class="continue">Continue Shopping</a>
-	</div>
-	<div class="cart">
-		<!--    <ul class="tableHead">
-        <li class="prodHeader">Product</li>
-        <li>Quantity</li>
-        <li>Total</li>
-         <li>Remove</li>
-      </ul>-->
+	<h1 class="projTitle">
+		My Garage
+		<div class="heading">
+			<a href="{% url 'ride' %}" class="continue">Explore more Cars</a>
+		</div>
+	</h1>
 
+	{% if carts.cart_items.count > 0 %}
+
+	<div class="cart">
 		<ul class="cartWrap">
+			{% for cartitems in carts.cart_items.all %}
 			<li class="items odd">
-				{% for cartitems in carts.cart_items.all %}
 				<div class="infoWrap">
 					<img
-						src="{{cartitems.car.images.url}}"
+						src="{{ cartitems.car.images.url }}"
 						style="height: 100px; weight: 100px"
 					/>
 					<div class="cartSection">
@@ -438,56 +435,53 @@
 							class="itemImg"
 						/>
 						<p class="itemNumber"></p>
-						<h3>{{cartitems.car.car_name}}</h3>
-
+						<h3>{{ cartitems.car.car_name }}</h3>
 						<p>
-							<input type="text" class="qty" placeholder="{{cartitems.car.price}}" /> X
-							1
+							<input type="text" class="qty" placeholder="{{ cartitems.car.price }}" />
+							X 1
 						</p>
-
 						<p class="stockStatus">In Stock</p>
 					</div>
-
 					<div class="prodTotal cartSection">
-						<p>₹{{cartitems.car.price}}</p>
+						<p>₹{{ cartitems.car.price }}</p>
 					</div>
 					<div class="cartSection removeWrap">
 						<a href="{% url 'remove' cartitems.uid %}" class="remove">x</a>
 					</div>
 				</div>
 			</li>
-
-			<!--<li class="items even">Item 2</li>-->
 			{% endfor %}
 		</ul>
 	</div>
-
 	<div class="subtotal cf">
 		<ul>
 			<li class="totalRow">
 				<span class="label">Subtotal </span
-				><span class="value">: ₹{{carts.sub_cart_total}}</span>
+				><span class="value">: ₹{{ carts.sub_cart_total|default:"0.00" }}</span>
 			</li>
-
 			<li class="totalRow">
 				<span class="label">Shipping </span><span class="value">: ₹10000</span>
 			</li>
-
 			<li class="totalRow">
 				<span class="label">Tax </span
-				><span class="value">: ₹{{carts.tax_cart_total}}</span>
+				><span class="value">: ₹{{ carts.tax_cart_total|default:"0.00" }}</span>
 			</li>
-			<strong
-				><li class="totalRow final">
+			<strong>
+				<li class="totalRow final">
 					<span class="label">Total </span
-					><span class="value">: ₹{{carts.get_cart_total}}</span>
-				</li></strong
-			>
+					><span class="value">: ₹{{ carts.get_cart_total|default:"0.00" }}</span>
+				</li>
+			</strong>
 			<li class="totalRow">
 				<a href="{% url 'processOrder' %}" class="btn continue">Checkout</a>
 			</li>
 		</ul>
 	</div>
+	{% else %}
+	<br />
+	<h2>Garage is Empty</h2>
+	<br />
+	{% endif %}
 </div>
 
 {% endblock content %}

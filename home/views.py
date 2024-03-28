@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     car = Car.objects.all()
     paginator = Paginator(car, 3)
-    
+    print(car)
 
     page_number = request.GET.get('page')
     car = paginator.get_page(page_number)
@@ -26,7 +26,8 @@ def home(request):
 def buyer(request):
     car = Car.objects.all()
     paginator = Paginator(car, 3)
-    
+    print(car)
+
 
     page_number = request.GET.get('page')
     car = paginator.get_page(page_number)
@@ -99,6 +100,7 @@ def add_cart(request, car_uid):
                 cart = cart,
                 car = car_obj
     )
+    print("added to cart")
     return redirect('/buyer/')
 
 
@@ -137,8 +139,15 @@ def ride(request):
     
 
     page_number = request.GET.get('page')
-    car = paginator.get_page(page_number)
-    
+    try:
+        car = paginator.get_page(page_number)
+    except PageNotAnInteger:
+       # If page is not an integer, deliver the first page.
+        car = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver the last page of results.
+        car = paginator.page(paginator.num_pages)
+        
     context = {
         'car':car 
     }
