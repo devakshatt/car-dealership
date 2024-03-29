@@ -13,14 +13,18 @@
 			<div class="img-display">
 				<div class="img-showcase">
 					{% if car.images %}
-					<img src="{{car.images.url}}" alt="shoe image" />
+					<img src="{{ car.images.url }}" alt="shoe image" />
 					{% endif %} {% if car.images4 %}
 					<img src="{{ car.images4.url }}" alt="shoe image" />
 					{% endif %} {% if car.images2 %}
-					<img src="{{car.images2.url}}" alt="shoe image" />{% endif %}
+					<img src="{{ car.images2.url }}" alt="shoe image" />
+					{% endif %} {% if car.images3 %}
+					<img src="{{ car.images3.url }}" alt="shoe image" />
+					{% endif %}
 				</div>
 			</div>
 			<div class="img-select">
+				{% if car.images2 %}
 				<div class="img-item">
 					<a href="#" data-id="1">
 						<img
@@ -30,6 +34,8 @@
 						/>
 					</a>
 				</div>
+				{% endif %} {% if car.images3 %}
+
 				<div class="img-item">
 					<a href="#" data-id="2">
 						<img
@@ -39,6 +45,8 @@
 						/>
 					</a>
 				</div>
+				{% endif %} {% if car.images4 %}
+
 				<div class="img-item">
 					<a href="#" data-id="3">
 						<img
@@ -48,6 +56,8 @@
 						/>
 					</a>
 				</div>
+				{% endif %} {% if car.images5 %}
+
 				<div class="img-item">
 					<a href="#" data-id="4">
 						<img
@@ -57,6 +67,7 @@
 						/>
 					</a>
 				</div>
+				{% endif %}
 			</div>
 		</div>
 		<!-- card right -->

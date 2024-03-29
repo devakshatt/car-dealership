@@ -125,3 +125,9 @@ def sell2(request):
 
 def result2(request):
     return render(request, 'seller/result2.html')
+
+def get_car_models(request):
+    selected_company = request.GET.get('company')
+
+
+    return render(request, 'seller/result.html', {'result':result})

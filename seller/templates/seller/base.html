@@ -558,14 +558,14 @@ header{
     <a href="{% url 'home' %}" class="logo"><img src="{% static 'img/jeep.jpeg' %}" alt=""></a>
     <div class="bx bx-menu" id="menu-icon"></div>
     <ul class="navbar">
-        <li><a href="{% url 'seller' %}">Home</a></li>
-        <li><a href="{% url 'sell' %}">Sell</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#reviews">Reviews</a></li>
+        <!-- <li><a href="{% url 'seller' %}">Home</a></li> -->
+        <li><a href="{% url 'sell' %}">Sell a car</a></li>
+        <!-- <li><a href="#services">Services</a></li>
+        <li><a href="#reviews">Reviews</a></li> -->
    
     <div class="header-btn">
         {% if request.user.is_authenticated %}
-        <a href="{% url 'cart' %}" class="sign-up">Dashboard</a>
+        <!-- <a href="{% url 'cart' %}" class="sign-up">Dashboard</a> -->
         <a href="{% url 'logout' %}" class="sign-up">Logout</a>
         {% comment %} <p> {{request.user.get_cart_count}} </p> {% endcomment %}
         {% comment %} <a href="#" class="sign-in">Sign In</a> {% endcomment %}
