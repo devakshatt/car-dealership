@@ -1,4 +1,4 @@
-{% extends 'home/base.html' %} {% block content %}
+{% extends 'seller/base.html' %} {% block content %}
 <style>
 	@import 'compass/css3';
 
@@ -412,9 +412,7 @@
 <div class="wrap cf">
 	<h1 class="projTitle">
 		My Garage
-		<div class="heading">
-			<a href="{% url 'ride' %}" class="continue">Explore more Cars</a>
-		</div>
+		<div class="">My selling Car List</div>
 	</h1>
 
 	{% if carts.cart_items.count > 0 %}

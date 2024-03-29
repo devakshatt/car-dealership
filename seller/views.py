@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import pandas
 from .models import *
-from home.models import Car
+from home.models import Car,Cart
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 import pickle 
@@ -138,8 +138,8 @@ class CarCreateView(CreateView):
 
 
 def dashboard(request):
-    # cart = Cart.objects.get(is_paid=False, user= request.user)
-    context={'carts':"cart"}
+    cart = Cart.objects.get(is_paid=False, user= request.user)
+    context={'carts':cart}
     return render(request, 'seller/dashboard.html', context)
 
 
