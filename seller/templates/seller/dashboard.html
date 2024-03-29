@@ -212,6 +212,12 @@
 			}
 		}
 	}
+	.car-box {
+		margin-bottom: 10px;
+		border: 1px solid #333;
+		border-radius: 15px;
+		padding: 5px;
+	}
 
 	.special {
 		display: block;
@@ -415,69 +421,30 @@
 		<div class="">My selling Car List</div>
 	</h1>
 
-	{% if carts.cart_items.count > 0 %}
+	{% if cars.count > 0 %}
 
 	<div class="cart">
 		<ul class="cartWrap">
-			{% for cartitems in carts.cart_items.all %}
-			<li class="items odd">
-				<div class="infoWrap">
-					<img
-						src="{{ cartitems.car.images.url }}"
-						style="height: 100px; weight: 100px"
-					/>
-					<div class="cartSection">
-						<img
-							src="http://lorempixel.com/output/technics-q-c-300-300-4.jpg"
-							alt=""
-							class="itemImg"
-						/>
-						<p class="itemNumber"></p>
-						<h3>{{ cartitems.car.car_name }}</h3>
-						<p>
-							<input type="text" class="qty" placeholder="{{ cartitems.car.price }}" />
-							X 1
-						</p>
-						<p class="stockStatus">In Stock</p>
-					</div>
-					<div class="prodTotal cartSection">
-						<p>₹{{ cartitems.car.price }}</p>
-					</div>
-					<div class="cartSection removeWrap">
-						<a href="{% url 'remove' cartitems.uid %}" class="remove">x</a>
-					</div>
+			{% for car in cars %}
+			<div class="car-box">
+				<div class="box-img">
+					{% if car.images %}
+					<img src="{{ car.images.url }}" alt="" />
+					{% endif %}
 				</div>
-			</li>
+				<h3>{{car.car_name}}</h3>
+				<h2>{{car.price}} <span>₹</span></h2>
+				<div class="cartSection removeWrap">
+					<a href="{% url 'delete_car' car.uid %}" class="remove">Delete</a>
+				</div>
+			</div>
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="subtotal cf">
-		<ul>
-			<li class="totalRow">
-				<span class="label">Subtotal </span
-				><span class="value">: ₹{{ carts.sub_cart_total|default:"0.00" }}</span>
-			</li>
-			<li class="totalRow">
-				<span class="label">Shipping </span><span class="value">: ₹10000</span>
-			</li>
-			<li class="totalRow">
-				<span class="label">Tax </span
-				><span class="value">: ₹{{ carts.tax_cart_total|default:"0.00" }}</span>
-			</li>
-			<strong>
-				<li class="totalRow final">
-					<span class="label">Total </span
-					><span class="value">: ₹{{ carts.get_cart_total|default:"0.00" }}</span>
-				</li>
-			</strong>
-			<li class="totalRow">
-				<a href="{% url 'processOrder' %}" class="btn continue">Checkout</a>
-			</li>
-		</ul>
-	</div>
+
 	{% else %}
 	<br />
-	<h2>Garage is Empty</h2>
+	<h2>Garage is Empty. Sell a car now</h2>
 	<br />
 	{% endif %}
 </div>

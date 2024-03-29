@@ -108,7 +108,12 @@ def result(request):
 class CarCreateView(CreateView):
     model = Car
     template_name = "seller/car.html"
-    fields = "__all__"
+    fields = ['category', 'car_name', 'desc', 'price', 'color', 'images', 'images2', 'images3', 'images4', 'images5']
+
+    def form_valid(self, form):
+        form.instance.added_by = self.request.user
+        print(self.request.user)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -138,12 +143,21 @@ class CarCreateView(CreateView):
 
 
 def dashboard(request):
-    cart = Cart.objects.get(is_paid=False, user= request.user)
-    context={'carts':cart}
+    cars = Car.objects.filter(added_by=request.user)
+
+    context={'cars':cars}
     return render(request, 'seller/dashboard.html', context)
 
 
-
+def delete_car(request, car_uid):
+    car = Car.objects.get(uid=car_uid)
+    if car.added_by == request.user:
+        car.delete_car()
+        messages.success(request, 'Car deleted successfully.')
+    else:
+        messages.error(request, 'You are not allowed to delete this car.')
+    
+    # return redirect('some_redirect_url')
 
 
 # Legacy

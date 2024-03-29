@@ -15,6 +15,7 @@ urlpatterns = [
     path('sell1/', views.sell2, name='sell1'),
     path('result2/', views.result2, name='result2'),
     path('get_car_models', views.get_car_models, name='get_car_models'),
+    path('delete_car/<>', views.car_uid, name='detail'),
 
     # path('car/', views.car, name='car'),
 ]

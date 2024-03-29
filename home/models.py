@@ -30,15 +30,17 @@ class Car(BaseModel):
     images3 = models.ImageField(upload_to='car', null=True, blank=True)
     images4 = models.ImageField(upload_to='car', null=True, blank=True)
     images5 = models.ImageField(upload_to='car', null=True, blank=True)
-    
+    added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,  related_name = 'cars')
+
     def __str__(self):
         return self.car_name
     def get_absolute_url(self):
     #return reverse('article-detail', args=(str(self.id)) )
         return reverse('sell')
 
-  
-    
+    def delete(self):
+        self.delete_car()
+
 
 
 class Cart(BaseModel):
