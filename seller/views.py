@@ -9,6 +9,10 @@ import pandas as pd
 import numpy as np
 from django.contrib.auth import login , logout, authenticate
 from django.http import JsonResponse
+from django.urls import reverse_lazy
+from django.urls import reverse
+
+from django.http import Http404
 
 model=pickle.load(open('LinearRegressionModel.pkl','rb'))
 df=pd.read_csv('Cleaned_Car_data.csv')
@@ -123,6 +127,9 @@ class CarCreateView(CreateView):
 
         return context
 
+    def get_success_url(self):
+        return reverse_lazy('dashboard') 
+
 # def car(request):
 #     if request.method =='POST':
 #         category = request.POST.get('category')
@@ -150,15 +157,15 @@ def dashboard(request):
 
 
 def delete_car(request, car_uid):
-    car = Car.objects.get(uid=car_uid)
-    if car.added_by == request.user:
-        car.delete_car()
-        messages.success(request, 'Car deleted successfully.')
-    else:
-        messages.error(request, 'You are not allowed to delete this car.')
-    
-    # return redirect('some_redirect_url')
-
+    try:
+        car = Car.objects.get(uid=car_uid)
+        if car.added_by == request.user:
+            car.delete()
+            return redirect(reverse('dashboard'))
+        else:
+            raise Http404("You are not allowed to delete this car.")
+    except Car.DoesNotExist:
+        raise Http404("Car does not exist.")
 
 # Legacy
 def sell2(request):

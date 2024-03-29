@@ -38,8 +38,6 @@ class Car(BaseModel):
     #return reverse('article-detail', args=(str(self.id)) )
         return reverse('sell')
 
-    def delete(self):
-        self.delete_car()
 
 
 

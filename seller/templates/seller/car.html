@@ -156,7 +156,6 @@
 		</div>
 		<div class="contactForm">
 			<h1>Car Selling Form</h1>
-			₹{{ result }}
 			<form action="{% url 'car' %}" enctype="multipart/form-data" method="POST">
 				{% csrf_token %} {{form.media}} {{form.as_p}}
 				<!-- {{ form.media }}
