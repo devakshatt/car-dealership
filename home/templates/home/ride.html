@@ -6,7 +6,9 @@
 	{% for cars in car %}
 	<div class="box">
 		<div class="box-img">
-			<img src="{{cars.images.url}}" alt="" />
+			{% if cars.images %}
+			<img src="{{ cars.images.url }}" alt="" />
+			{% endif %}
 		</div>
 		<p><a href="{% url 'detail' cars.uid %}">View</a></p>
 		<h3>{{cars.car_name}}</h3>

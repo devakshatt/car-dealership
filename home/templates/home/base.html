@@ -546,15 +546,15 @@
 			/></a>
 			<div class="bx bx-menu" id="menu-icon"></div>
 			<ul class="navbar">
-				<li><a href="#home">Home</a></li>
-				<li><a href="{% url 'ride' %}">Ride</a></li>
-				<li><a href="#services">Services</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#reviews">Reviews</a></li>
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'ride' %}">Book a Ride</a></li>
+				<!-- <li><a href="#services">Services</a></li> -->
+				<!-- <li><a href="#about">About</a></li> -->
+				<!-- <li><a href="#reviews">Reviews</a></li> -->
 
 				<div class="header-btn">
 					{% if request.user.is_authenticated %}
-					<a href="{% url 'cart' %}" class="sign-up">Dashboard</a>
+					<a href="{% url 'cart' %}" class="sign-up">My Garage</a>
 					<a href="{% url 'Logout' %}" class="sign-up">Logout</a>
 					{% comment %}
 					<p>{{request.user.get_cart_count}}</p>
