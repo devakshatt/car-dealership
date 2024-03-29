@@ -155,7 +155,7 @@
         </div> -->
 		</div>
 		<div class="contactForm">
-			<h1>Registaration Form</h1>
+			<h1>Car Price Predictor</h1>
 			<p>If your model is not here <a href="{% url 'sell1' %}">check this</a></p>
 			<form action="{% url 'result' %}">
 				{% csrf_token %}
@@ -226,5 +226,31 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	function load_car_models() {
+		var selectedCompany = document.getElementById('company').value;
+		var carModelsSelect = document.getElementById('car_models');
+
+		// Clear existing options
+		carModelsSelect.innerHTML = '<option value="">Loading...</option>';
+
+		fetch(`/sell/get_car_models?company=${selectedCompany}`)
+			.then(response => response.json())
+			.then(data => {
+				// Clear the loading message
+				carModelsSelect.innerHTML = '';
+
+				// Populate car models select element with fetched data
+				data.forEach(model => {
+					var option = document.createElement('option');
+					option.text = model;
+					option.value = model;
+					carModelsSelect.add(option);
+				});
+			})
+			.catch(error => console.error('Error:', error));
+	}
+</script>
 
 {% endblock content %}

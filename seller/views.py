@@ -8,6 +8,7 @@ import pickle
 import pandas as pd
 import numpy as np
 from django.contrib.auth import login , logout, authenticate
+from django.http import JsonResponse
 
 model=pickle.load(open('LinearRegressionModel.pkl','rb'))
 df=pd.read_csv('Cleaned_Car_data.csv')
@@ -80,6 +81,12 @@ def sell(request):
     car_models.insert(0,'Select Company')
     return render(request, 'seller/sell.html', {'companies':companies,'car_models':car_models})
 
+def get_car_models(request):
+    selected_company = request.GET.get('company')
+    filtered_models = df[df['name'].str.startswith(selected_company)]['name'].unique()
+    car_models = sorted(filtered_models)
+    
+    return JsonResponse(car_models, safe=False)
 
 def result(request):
     name=request.GET['name']
@@ -87,7 +94,6 @@ def result(request):
     year=request.GET['year']
     kms_driven=request.GET['kms_driven']
     fuel_type=request.GET['fuel_type']
-    
 
     result=model.predict(pd.DataFrame(columns=['name', 'company', 'year', 'kms_driven', 'fuel_type'],
                               data=np.array([name,company,year,kms_driven,fuel_type]).reshape(1, 5)))
@@ -103,6 +109,14 @@ class CarCreateView(CreateView):
     model = Car
     template_name = "seller/car.html"
     fields = "__all__"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add your additional context here
+        # context['car'] = Car.objects.first()  # Example: Get the first Car object
+        context['car'] = "TBC"  # Example: Get the first Car object
+
+        return context
 
 # def car(request):
 #     if request.method =='POST':
@@ -120,14 +134,23 @@ class CarCreateView(CreateView):
 #         car.save()
 #     return render(request, 'seller/car.html')
 
+
+
+
+def dashboard(request):
+    # cart = Cart.objects.get(is_paid=False, user= request.user)
+    context={'carts':"cart"}
+    return render(request, 'seller/dashboard.html', context)
+
+
+
+
+
+# Legacy
 def sell2(request):
     return render(request, 'seller/sell1.html')
 
 def result2(request):
     return render(request, 'seller/result2.html')
 
-def get_car_models(request):
-    selected_company = request.GET.get('company')
 
-
-    return render(request, 'seller/result.html', {'result':result})

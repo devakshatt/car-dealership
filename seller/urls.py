@@ -10,7 +10,11 @@ urlpatterns = [
     path('sell/', views.sell, name='sell'),
     path('result/', views.result, name='result'),
     path('car/', views.CarCreateView.as_view(), name='car'),
-     path('sell1/', views.sell2, name='sell1'),
+    path('dashboard/',views.dashboard, name='dashboard'),
+
+    path('sell1/', views.sell2, name='sell1'),
     path('result2/', views.result2, name='result2'),
+    path('get_car_models', views.get_car_models, name='get_car_models'),
+
     # path('car/', views.car, name='car'),
 ]
